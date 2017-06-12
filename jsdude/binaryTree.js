@@ -1,24 +1,15 @@
 // Binary Search Tree Questions 
 
-// Question: How would you create a binary search tree?
-// Answer:
+// How would you create a binary search tree?
+var Node = function(id){
 
-// to create a tree you need a node. a node in a tree looks like
-
-
-// function Node(val){
-//   this.value = val;
-//   this.left = null;
-//   this.right = null;
-// }
+}
         
-// Create a constructor for binary search tree
-
-
-// function BinarySearchTree(){
-//   this.root = null;
-// }
-        
+// Create a constructor for binary search tree?
+var Tree = function(){
+  
+}
+    
 // Now you need to understand the structure of a binary search tree. For every node value in the left is smaller than the value of the node and value at the right is higher than the value of the root.
 
 // so while inserting a value you have to find the appropriate location
