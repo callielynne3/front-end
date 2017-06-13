@@ -41,11 +41,11 @@
 // What techniques/processes do you use?
 
 // What are the different ways to visually hide content (and make it available only for screen readers)?
+// visibilty hidden
+// display none
 
 // Have you ever used a grid system, and if so, what do you prefer?
 // Bootstrap
-
-// Have you used or implemented media queries or mobile specific layouts/CSS?
 
 // Are you familiar with styling SVG?
 
@@ -72,8 +72,6 @@
 // Have to use build tools to compile
 // Easy to abuse (@extend in sass)
 
-// Describe what you like and dislike about the CSS preprocessors you have used.
-
 // How would you implement a web design comp that uses non-standard fonts?
 // @font-face to write my own font-family
 // @import to import prepared web font(e.g. Google Webfonts)
@@ -90,6 +88,8 @@
 // Explain your understanding of the box model and how you would tell the browser in CSS to render your layout in different box models.
 
 // What does * { box-sizing: border-box; } do? What are its advantages?
+// The box-sizing property is used to tell the browser what the sizing properties (width and height) should include.
+// The width and height properties (and min/max properties) includes content, padding and border, but not the margin.
 
 // List as many values for the display property that you can remember.
 // none
@@ -103,7 +103,7 @@
 // inherit
 
 // What's the difference between inline and inline-block?
-// Inline displays an element well... inline... As such, it's not considered a block element, and it allows for elements to render next to another horizontally. You get both when you use inline-block. It's like using float, but without taking things out of flow.
+// Inline displays an element inline. As such, it's not considered a block element, and it allows for elements to render next to another horizontally. You get both when you use inline-block. It's like using float, but without taking things out of flow.
 
 // What's the difference between a relative, fixed, absolute and statically positioned element?
 // Static - The default behavior of an element.
@@ -115,8 +115,6 @@
 // CSS priority is determined by specificity and inheritance: https://www.smashingmagazine.com/2010/04/css-specificity-and-inheritance/
 // Specificity: ID > class, psuedo-class > element, psudo-element
 // Inheritence: specified value → computed value → used value → actual value
-
-// What existing CSS frameworks have you used locally, or in production? How would you change/improve them?
 
 // Have you played around with the new CSS Flexbox or Grid specs?
 // http://flexboxfroggy.com
