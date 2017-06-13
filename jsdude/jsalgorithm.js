@@ -52,10 +52,18 @@ function greatestCommonDivisor(a, b){
 }
 
 // Remove duplicate members from an array?
-function removeDups(){
-  for(var i = 0; i < arr.length; i++){
-    var num = arr[i];
+function removeDuplicate(arr){
+  var exists ={},
+      outArr = [], 
+      elm;
+  for(var i =0; i<arr.length; i++){
+    elm = arr[i];
+    if(!exists[elm]){
+      outArr.push(elm);
+      exists[elm] = true;
+   }
   }
+  return outArr;
 }
 
 // Merge two sorted array?
@@ -205,7 +213,6 @@ function sumFinder(arr, sum){
 }
 
 // Find the largest sum of any two elements?
-
 function topSum(arr){
   
   var biggest = arr[0], 
