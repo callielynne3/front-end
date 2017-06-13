@@ -1,291 +1,176 @@
 // Binary Search Tree Questions 
 
 // How would you create a binary search tree?
-var Node = function(id){
-
+var Node = function(value){
+  this.value = value; 
+  this.rightChild = null;
+  this.leftChild = null;
 }
         
 // Create a constructor for binary search tree?
 var Tree = function(){
-  
+  this.root = null; 
+  this.size = 0;
 }
     
 // Now you need to understand the structure of a binary search tree. For every node value in the left is smaller than the value of the node and value at the right is higher than the value of the root.
 
 // so while inserting a value you have to find the appropriate location
+binarySearchTree.prototype.insert = function(insertVal) {
+  if (this.root === null) {
+    this.root = new node(insertVal);
+    this.size++;
+    return;
+  } else {
+    var traverse = function(currentNode) {
+      if (insertVal > currentNode.value) {
+        if (currentNode.rightChild === null) {
+          currentNode.rightChild = new node(insertVal);
+          return;
+        } else {
+          traverse(currentNode.rightChild);
+        }
+      } else {
+        if (currentNode.leftChild === null) {
+          currentNode.leftChild = new node(insertVal);
+          return;
+        } else {
+          traverse(currentNode.leftChild);
+        }
+      }
+    }
+    traverse(this.root);
+    this.size++;
+  }
+};
 
+// search
+binarySearchTree.prototype.search = function(searchVal) {
+  var check = false;
+  var traverse = function(currentNode) {
+    if (currentNode === null) {
+      return;
+    } else if (currentNode.value === searchVal) {
+      check = true;
+      return;
+    }
+    traverse(currentNode.rightChild);
+    traverse(currentNode.leftChild);
+  }
+  traverse(this.root);
+  return check;
+};
 
-// BinarySearchTree.prototype.push = function(val){
-//    var root = this.root;
-
-//    if(!root){
-//       this.root = new Node(val);
-//       return;
-//    }
-
-//    var currentNode = root;
-//    var newNode = new Node(val); 
-
-//    while(currentNode){
-//       if(val < currentNode.value){
-//           if(!currentNode.left){
-//              currentNode.left = newNode;
-//              break;
-//           }
-//           else{
-//              currentNode = currentNode.left;
-//         }
-//      }
-//      else{
-//          if(!currentNode.right){
-//             currentNode.right = newNode;
-//             break;
-//          }
-//          else{
-//             currentNode = currentNode.right;
-//          }
-//      }
-//   }
-
-// }
-        
-
-// var bst = new BinarySearchTree();
-// bst.push(3);
-// bst.push(2);
-// bst.push(4);
-// bst.push(1);
-// bst.push(5);
-        
+// delete
+binarySearchTree.prototype.delete = function(removeVal) {
+   var temp = [];
+   var traverse = function(currentNode) {
+    if (currentNode === null) {
+      return;
+    } else if (currentNode.value !== removeVal) {
+      temp.push(currentNode.value);
+    }
+    traverse(currentNode.rightChild);
+    traverse(currentNode.leftChild);
+   }
+   traverse(this.root);
+   if (temp.lenght === this.size) {
+    console.log("there is no such value to delete");
+    return;
+   }
+   this.root = null;
+   this.size = 0;
+   var toInsert;
+   for (var i = 0; i < temp.length; i++) {
+    toInsert = temp[i];
+    this.insert(toInsert);
+   }
+   return temp;
+};
+      
 // Breadth First Search
-// Question: How do you implement Breadth First Search
-
-// Answer:
-
-
-          
-        
-// ref: stackoverflow
-
-// ref: js algorithms
+binarySearchTree.prototype.breadthFirst = function(){
+  var queue = [];
+  var result = [];
+  var cNode;
+  queue.push(this.root);
+  while (queue.length > 0) {
+    cNode = queue.shift();
+    if (cNode.leftChild !== null) {
+      queue.push(cNode.leftChild);
+    }
+    if (cNode.rightChild !== null) {
+      queue.push(cNode.rightChild);
+    }
+    result.push(cNode.value);
+  }
+  return result;
+}
 
 // Depth first search
-// Question: How to perform in order traversal
+
+// In order
+binarySearchTree.prototype.inOrder = function() {
+  var result = [];
+  var traverse = function(cNode){
+    if(cNode === null) {
+     return;
+    }
+    traverse(cNode.leftChild);
+    result.push(cNode.value);
+    traverse(cNode.rightChild);
+  }
+  traverse(this.root);
+  return result;
+}
 
 
-
-// function dfs(node){
-//   if(node){
-//     console.log(node.value);
-//     dfs(node.left);
-//     dfs(node.right);
-//   }
-// }
-        
-// In order Traversal
-// Question:
-
-// Answer:
-
-
-
-
-// function inorder(node){
-//    if(node){
-//       inorder(node.left);
-//       console.log(node.value);
-//       inorder(node.right);
-//    }
-// }
-        
-// ref: source of image
-
-// pre order
-
-
-
-
-// //code here
-        
-// ref: wiki pseudocode doesnt work for JavaScript
+// Pre order 
+binarySearchTree.prototype.preOrder = function(){
+  var result = [];
+  var traverse = function(cNode) {
+    if (cNode === null) {
+     return;
+    }
+    result.push(cNode.value);
+    traverse(cNode.leftChild);
+    traverse(cNode.rightChild);
+  }
+  traverse(this.root);
+  return result;
+}
 
 // Post order
-
-
-// //code here
+binarySearchTree.prototype.postOrder = function(){
+  var result = [];
+  var traverse = function(cNode){
+    if (cNode === null) {
+     return;
+    }
+    traverse(cNode.leftChild);
+    traverse(cNode.rightChild);
+    result.push(cNode.value);
+  }
+  traverse(this.root);
+  return result;
+}
         
-// min and max value
-// Question: How can you find the min value in a bst
+// How can you find the min value in a bst
 
-// finding min is super simple. the go through the left node and left most node is the minimum node
+// How can you find the max value in a bst
 
-
-
-// function minNode(node){
-//    if(!node){
-//       return 0;
-//    }
-//    if(node.left){
-//      return minNode(node.left)
-//   }
-//   return node.value
-// }
-        
-// Question: How can you find the max value in a bst
-
-
-
-// function maxNode(node){
-//    if(!node){
-//      return 0;
-//   }
-//   if(node.right){
-//      return maxNode(node.right)
-//   }
-//   return node.value;
-// }
-        
-// Balanced and Unbalanced Tree
-// Question:What is balanced and unbalanced tree
-
-// Answer:
-
+// What is balanced and unbalanced tree
 // The left and right subtrees' heights differ by at most one, AND
 // The left subtree is balanced, AND
 // The right subtree is balanced
 // ref: Get answer from here
 
-// Check BST
-// Question: check a binary tree is BST or not?
-
-// Answer:
-
-// Simple but wrong approach
-
-// Step-1: if node is null, its BST
-
-
-// function isBST(node){
-//    if(!node){
-//      return true; 
-//   }
-
-//   if(node.left != null && node.left.value > node.value){ 
-//     return false;
-//   }
-
-//   if(node.right !=null && node.right.value < node.value) {
-//     return false;
-//   }
-
-//   if(!isBST(node.left) || !isBST(node.right)) {
-//     return false;
-//   }
-
-//   return true;  
-// }
-        
-// The reason this method will generate wrong result is for
-
-
-// do in order traversal
-
-
-
-//           //use method 4 in the link below
-        
-// ref: taken from geeksforgeeks
-
-// Check balanced
-// Quetion: How could you check a tree is balanced or not
-
-// Answer:
-
-// check multiple example whether it is balanced. check balanced tree example
-
-// ref: get the answer from here
+// Check a binary tree is BST or not?
 
 // Height of a tree
 
-
-
-// function height(node){
-//    if(!node) return 0;
-//    var leftHeight = height(node.left);
-//    var rightHeight = height(node.right);
-
-//    return Math.max(leftHeight, rightHeight) + 1;
-// }
-        
 // print ancestor
-// Question:
 
-// Answer:
-
-
-// function printAncestor(node, target){
-//    if(!node) return false
-
-//    if(node.value == target) return true;
-   
-//    if(printAncestor(node.left, target) || printAncestor(node.rigth, target)){
-//      console.log(node.value);
-//      return true;
-//   }
-
-//   return false
-// }
-        
-// ref: from stack overflow
-
-// Doesnt work for intermediate nodes. Debug this
 // Print all nodes between two nodes
-// Question:
-
-// Answer:
-
-
-// //put the code
-        
-// ref: Get the code form here
 
 // common ancestor
-
-
-// this will work for bst only. If you are dealing with binary tree..this needs to be modified
-
-// Make this code better
-
-
-// function commonAncestor(node, n1, n2){
-//    if(!node) return;
-//    var val = node.value;
-//    if(n1 < val && n2<val){
-//      return commonAncestor(node.left, n1, n2);
-//    }
-//    if(n1<val && n2<val){
-//      return commonAncestor(node.right, n1, n2);
-//   }
-//   console.log('lowest common ancestor value: ', val);
-//   return node;
-// }
-        
-// ref: common ancesotr
-
-// coomon ancestor for binary tree
-
-
-// function commonAncestorBT(node, n1, n2){
-//    if(!node) return;
-//    var val = node.value;
-//    if(n1 == val || n2 ==val){
-//      return node;
-//    }
-//    var left = commonAncestorBT(node.left, n1, n2);
-//    var right = commonAncestorBT(node.right, n1, n2);
-//    if(left && right){
-//      return node;
-//   }
-//   return (left) ? left : right;
-// }
-//         
